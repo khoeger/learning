@@ -29,3 +29,6 @@ git pull origin master
 git merge [name]
 
 git push origin master
+
+## How to remove files without deleting them locally
+git rm -r --cached [filename]
