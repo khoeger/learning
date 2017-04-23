@@ -10,3 +10,11 @@ Make a 3d string with two fixed ends, such as a harp string, that vibrates when 
 3. Import 3d string object into aframe
 4. Figure out how to trigger a moving string from a still starting point in aframe
 5. add sound of string
+
+## Bibliography
+* https://web.stanford.edu/dept/astro/dorris/StandingWaves.pdf
+* http://jwilson.coe.uga.edu/EMAT6450/Class%20Projects/Hornbeck/Math,%20Music,%20&%20Guitar.pdf
+* https://music.stackexchange.com/questions/5489/why-do-harmonics-happen
+* https://en.wikipedia.org/wiki/Harp
+* http://www.physicsclassroom.com/class/sound/Lesson-5/Guitar-Strings
+* http://www.physicsclassroom.com/class/sound/Lesson-4/Fundamental-Frequency-and-Harmonics
