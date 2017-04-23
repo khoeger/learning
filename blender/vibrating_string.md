@@ -18,3 +18,5 @@ Make a 3d string with two fixed ends, such as a harp string, that vibrates when 
 * https://en.wikipedia.org/wiki/Harp
 * http://www.physicsclassroom.com/class/sound/Lesson-5/Guitar-Strings
 * http://www.physicsclassroom.com/class/sound/Lesson-4/Fundamental-Frequency-and-Harmonics
+* http://lesterbanks.com/2014/04/animating-oscillating-effect-vibrating-string-blender/
+* https://aframe.io/aframe-school/#/
