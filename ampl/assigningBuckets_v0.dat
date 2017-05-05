@@ -1,0 +1,17 @@
+set Contents:= content1 content2 content3;
+set Buckets:= bucket1 bucket2 bucket3 bucket4 bucket5;
+
+param: totalPercentage :=
+content1  0.25
+content2  0.15
+content3  0.6 ;
+
+param: bucketSpace :=
+bucket1 0.05
+bucket2 0.10
+bucket3 0.20
+bucket4 0.40
+bucket5 0.25  ;
+
+param M := 1000;
+param bucketsAllowed := 1;

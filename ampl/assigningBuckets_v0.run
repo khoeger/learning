@@ -1,0 +1,6 @@
+#reset;
+#model prod0.mod;
+solve;
+
+display amountPlaced;
+display forceBucket;
