@@ -1,5 +1,5 @@
 # From http://blog.thedataincubator.com/2015/09/painlessly-deploying-data-apps-with-bokeh-flask-and-heroku/
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request, redirect
 app_lulu = Flask(__name__)
 
 app_lulu.vars={}
@@ -24,6 +24,11 @@ def index_lulu():
 
 @app_lulu.route('/next_lulu',methods=['POST'])
 def next_lulu():  #remember the function name does not need to match the URL
+    return redirect('/usefulfunction_lulu')
+
+
+@app_lulu.route('/usefulfunction_lulu',methods=['GET','POST'])
+def usefulfunction_lulu():
     return render_template('layout_lulu.html',num=1,question='Which fruit do you like best?',ans1='banana',\
         ans2='mango',ans3='pineapple')
 
