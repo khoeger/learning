@@ -19,7 +19,13 @@ def index_lulu():
         f.write('Age: %s\n\n'%(app_lulu.vars['age']))
         f.close()
 
-        return(render_template('layout_lulu.html',num=1,questions='How many eyes do you have?',ans1='1',ans2='2',ans3='3'))
+        return render_template('layout_lulu.html',num=1,question='How many eyes do you have?',ans1='1',\
+            ans2='2',ans3='3')
+
+@app_lulu.route('/next_lulu',methods=['POST'])
+def next_lulu():  #remember the function name does not need to match the URL
+    return render_template('layout_lulu.html',num=1,question='Which fruit do you like best?',ans1='banana',\
+        ans2='mango',ans3='pineapple')
 
 if __name__ == "__main__":
     app_lulu.run(debug=True)
