@@ -1,3 +1,4 @@
+from bokeh.layouts import gridplot
 from bokeh.plotting import figure, output_file, show
 import numpy as np
 
@@ -53,17 +54,17 @@ p2.line(x0,y2,legend="y=10^x^2",line_color="orange",line_dash="4 4")
 # show the results
 show(p2)
 
-## --Vectorized Colors and Sizes
+## ---- Vectorized Colors and Sizes
 
 # prepare some data
 N = 4000
 x_vcs = np.random.random(size=N)*100
 y_vcs = np.random.random(size=N)*100
 radii_vcs = np.random.random(size=N)*1.5
-colors_vcs = [
-            "#%02x%02x%02x" % (int(r), int(g),150)
-            for r,g in zip(50+2*x_vcs,30+2*y_vcs)
-]
+colors_vcs =    [
+                    "#%02x%02x%02x" % (int(r), int(g),150)
+                    for r,g in zip(50+2*x_vcs,30+2*y_vcs)
+                ]
 
 # output to static HTML file (with CDN resources)
 output_file("color_scatter.html",
@@ -84,3 +85,46 @@ p3.circle(  x_vcs,
             line_color=None)
 
 show(p3)
+
+## ---- Linked panning and brushing
+
+# Prepare some data
+N4 = 100
+x4 = np.linspace(0,4*np.pi, N4)
+y04 = np.sin(x4)
+y14 = np.cos(x4)
+y24 = np.sin(x4) + np.cos(x4)
+
+# output to static HTML File
+output_file("linked_panning.html")
+
+# create a new plot
+s1 = figure(width=250,
+            plot_height=250,
+            title=None)
+s1.circle(  x4,
+            y04,
+            size=10,
+            color="navy",
+            alpha=0.5)
+
+# NEW create a new pplot and share both ranges
+s2 = figure(width=250,
+            height=250,
+            x_range=s1.x_range,
+            y_range=s1.y_range,
+            title=None)
+s2.triangle(x4,y14,size=10,color="firebrick",alpha=0.5)
+
+# NEW create a new plot and shareonly one range
+s3 = figure(width=250,
+            height=250,
+            x_range=s1.x_range,
+            title=None)
+s3.square(x4,y24,size=10,color="olive",alpha=0.5)
+
+# NEW put the plots in a gridplot
+p4 = gridplot([[s1,s2,s3]],toolbar_location=None)
+
+# show the results
+show(p4)
