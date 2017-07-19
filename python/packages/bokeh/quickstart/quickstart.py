@@ -1,4 +1,5 @@
 from bokeh.plotting import figure, output_file, show
+import numpy as np
 
 ## -- Line Plot example
 
@@ -10,7 +11,9 @@ y = [6, 7, 2, 4, 5]
 output_file("lines.html")
 
 # create a new plot with a title and axis labels
-p = figure(title="simple line example", x_axis_label='x', y_axis_label='y')
+p = figure(title="simple line example",
+    x_axis_label='x',
+    y_axis_label='y')
 
 # add a line renderer with a legend and line thickness
 p.line(x,y,legend="Temp.", line_width=2)
@@ -49,3 +52,35 @@ p2.line(x0,y2,legend="y=10^x^2",line_color="orange",line_dash="4 4")
 
 # show the results
 show(p2)
+
+## --Vectorized Colors and Sizes
+
+# prepare some data
+N = 4000
+x_vcs = np.random.random(size=N)*100
+y_vcs = np.random.random(size=N)*100
+radii_vcs = np.random.random(size=N)*1.5
+colors_vcs = [
+            "#%02x%02x%02x" % (int(r), int(g),150)
+            for r,g in zip(50+2*x_vcs,30+2*y_vcs)
+]
+
+# output to static HTML file (with CDN resources)
+output_file("color_scatter.html",
+            title="color_scatter.pty example",
+            mode="cdn")
+
+TOOLS_vcs="resize,crosshair,pan,wheel_zoom,box_zoom,reset,box_select,lasso_select"
+
+# create a new plot with the tools above, and explicit ranges
+p3 = figure(tools=TOOLS_vcs, x_range=(0,100), y_range=(0,100))
+
+# add a circle renderer with vectorized colors and sizes
+p3.circle(  x_vcs,
+            y_vcs,
+            radius=radii_vcs,
+            fill_color=colors_vcs,
+            fill_alpha=0.6,
+            line_color=None)
+
+show(p3)
