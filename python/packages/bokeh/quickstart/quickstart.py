@@ -1,6 +1,8 @@
 from bokeh.layouts import gridplot
-from bokeh.plotting import figure, output_file, show
+from bokeh.plotting import *
+from bokeh.models import ColumnDataSource
 import numpy as np
+
 
 ## -- Line Plot example
 
@@ -128,3 +130,33 @@ p4 = gridplot([[s1,s2,s3]],toolbar_location=None)
 
 # show the results
 show(p4)
+
+## ---- Linked brushing example
+
+# prepare some date
+N5 = 300
+x5 = np.linspace(0,4*np.pi, N5)
+y05 = np.sin(x5)
+y15 = np.cos(x5)
+
+# output to static HTML File
+output_file("linked_brushing.html")
+
+# NEW: create a column data source for the plots to share
+source = ColumnDataSource(data=dict(x5=x5,y05=y05,y15=y15))
+
+TOOLS5 = "pan,wheel_zoom,box_zoom,reset,save,box_select,lasso_select"
+
+# create a new plot and add a renderer
+left = figure(tools=TOOLS5,width=350,height=350,title=None)
+left.circle('x5','y05',source=source)
+
+# create another new plot and add a renderer
+right = figure(tools=TOOLS5,width=350,height=350,title=None)
+right.circle('x5','y15',source=source)
+
+# put the subplots in a gridplot
+p5 = gridplot([[left,right]])
+show(p5)
+
+## ---- Datetime axes
