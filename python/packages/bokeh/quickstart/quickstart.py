@@ -1,6 +1,7 @@
 from bokeh.layouts import gridplot
-from bokeh.plotting import *
+from bokeh.plotting import * # figure, output_file, show
 from bokeh.models import ColumnDataSource
+from bokeh.sampledata.stocks import AAPL
 import numpy as np
 
 
@@ -160,3 +161,33 @@ p5 = gridplot([[left,right]])
 show(p5)
 
 ## ---- Datetime axes
+
+# prepare some data
+aapl = np.array(AAPL['adj_close'])
+aapl_dates = np.array(AAPL['date'],dtype=np.datetime64)
+
+window_size = 30
+window = np.ones(window_size)/float(window_size)
+aapl_avg = np.convolve(aapl,window,'same')
+
+# output to static HTML File
+output_file("stocks.html", title="stocks.py example")
+
+# create a new plot with a datetime axis type
+p6 = figure(width=800,height=300,x_axis_type="datetime")
+
+# add renderers
+p6.circle(aapl_dates, aapl, size=4, color="darkgrey",alpha=0.2, legend='close')
+p6.line(aapl_dates, aapl_avg, color="navy",legend="avg")
+
+# NEW: customize by setting attributes
+p6.title.text = "AAPL One-Month Average"
+p6.legend.location = "top_left"
+p6.grid.grid_line_alpha = 0
+p6.xaxis.axis_label = "Date"
+p6.yaxis.axis_label = "Price"
+p6.ygrid.band_fill_color = "olive"
+p6.ygrid.band_fill_alpha = 0.1
+
+# show the results
+show(p6)
