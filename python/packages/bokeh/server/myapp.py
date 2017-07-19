@@ -8,6 +8,13 @@ from bokeh.models import Button
 from bokeh.palettes import RdYlBu3
 from bokeh.plotting import figure, curdoc
 
+"""
+from os.path import dirname, join
+from helpers import load_data
+
+load_data(join(dirname(__file__, 'data', 'things.csv')))
+"""
+
 # create a plot and style its properties
 p = figure(x_range=(0, 100), y_range=(0, 100), toolbar_location=None)
 p.border_fill_color = 'black'
@@ -43,3 +50,11 @@ button.on_click(callback)
 
 # put the button and plot in a layout and add to the document
 curdoc().add_root(column(button, p))
+
+"""
+# set a new single key/value
+curdoc().template_variables["user_id"] = user_id
+
+# or update multiple at once
+curdoc().template_variables.update(first_name="Mary", last_name="Jones")
+"""
